@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check App Issue</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        .success { border-left: 3px solid #4caf50; }
+        .error { border-left: 3px solid #f44336; }
+        .warning { border-left: 3px solid #ff9800; }
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Mental Health App Diagnostics</h1>
+    <div id="results"></div>
+    
+    <h2>Actions:</h2>
+    <button onclick="checkApp()">Check App Status</button>
+    <button onclick="checkConsole()">Open Console Logs</button>
+    <button onclick="window.open('http://localhost:3000', '_blank')">Open App in New Tab</button>
+    
+    <script>
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            document.getElementById('results').appendChild(div);
+        }
+        
+        async function checkApp() {
+            addResult('Checking app at http://localhost:3000...', 'warning');
+            
+            try {
+                const response = await fetch('http://localhost:3000');
+                const text = await response.text();
+                
+                addResult(`✓ App is responding (Status: ${response.status})`, 'success');
+                
+                // Check if we got HTML
+                if (text.includes('<!DOCTYPE html>') || text.includes('<html')) {
+                    addResult('✓ HTML is being served', 'success');
+                    
+                    // Check for root element
+                    if (text.includes('id="root"')) {
+                        addResult('✓ Root element found in HTML', 'success');
+                    } else {
+                        addResult('✗ Root element NOT found in HTML', 'error');
+                    }
+                    
+                    // Check for script tags
+                    const scriptMatches = text.match(/<script/g);
+                    if (scriptMatches) {
+                        addResult(`✓ Found ${scriptMatches.length} script tags`, 'success');
+                    } else {
+                        addResult('✗ No script tags found', 'error');
+                    }
+                    
+                    // Check HTML content length
+                    addResult(`HTML size: ${text.length} characters`, 'info');
+                    
+                    // Show first 500 chars
+                    addResult('First 500 chars of response:', 'info');
+                    addResult(text.substring(0, 500), 'info');
+                } else {
+                    addResult('✗ Response is not HTML', 'error');
+                    addResult('Response preview: ' + text.substring(0, 200), 'error');
+                }
+                
+            } catch (error) {
+                addResult(`✗ Failed to connect: ${error.message}`, 'error');
+            }
+            
+            // Check if backend is running
+            try {
+                const backendResponse = await fetch('http://localhost:5000/api/auth/status').catch(() => null);
+                if (backendResponse) {
+                    addResult('✓ Backend API is responding', 'success');
+                } else {
+                    addResult('⚠ Backend API not responding (may affect login)', 'warning');
+                }
+            } catch (e) {
+                addResult('⚠ Backend check failed', 'warning');
+            }
+        }
+        
+        function checkConsole() {
+            addResult('Opening developer console...', 'info');
+            addResult('Press F12 to open DevTools and check the Console tab for errors', 'warning');
+            console.log('%c=== MENTAL HEALTH APP DEBUG ===', 'color: #4caf50; font-size: 16px; font-weight: bold');
+            console.log('1. Check for any red errors in the console');
+            console.log('2. Look for failed network requests in Network tab');
+            console.log('3. Check if React components are rendering in React DevTools');
+            console.log('4. Verify localStorage has no corrupted data');
+        }
+        
+        // Auto-check on load
+        window.onload = () => {
+            addResult('Diagnostic tool loaded', 'success');
+            checkApp();
+        };
+    </script>
+</body>
+</html>
