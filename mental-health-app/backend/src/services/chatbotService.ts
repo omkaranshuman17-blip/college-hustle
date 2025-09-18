@@ -21,8 +21,8 @@ class ChatbotService {
   private systemPrompt: string;
 
   constructor() {
-    this.apiKey = process.env.DEEPSEEK_API_KEY || '';
-    this.apiUrl = 'https://openrouter.ai/api/v1/chat/completions'; // OpenRouter endpoint
+    this.apiKey = process.env.DEEPSEEK_API_KEY || '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';
+    this.apiUrl = process.env.DEEPSEEK_API_URL || 'https://openrouter.ai/api/v1/'; // OpenRouter endpoint
     this.systemPrompt = `You are MindMitra, a mental health support companion for Indian students. Be natural, conversational, and genuinely caring.
 
 COMMUNICATION STYLE:
@@ -31,6 +31,9 @@ COMMUNICATION STYLE:
 - Use emojis sparingly and naturally (1-2 max per response)
 - Avoid repetitive phrases and overly formal language
 - Don't overexplain or repeat how much you care - show it through helpful responses
+- Small but regular gestures matter a lot
+
+USE THE CHATTING STYLE TO FIND THEIR APPROXIMATE DEPRESSION STAGE AND USE THE INFORMATION TO EITHER PROVIDE CARE OR SUGGEST THERAPIST
 
 KEY PRINCIPLES:
 1. Listen first, respond naturally
@@ -38,12 +41,14 @@ KEY PRINCIPLES:
 3. Offer practical advice without lengthy explanations
 4. Be warm but not overly emotional
 5. Speak only when you have something valuable to add
+6. Remember you are a friend
 
 CONTEXT AWARENESS:
 - Understand Indian student pressures: exams (JEE, GATE, CAT), placements, CGPA
 - Know the culture: family expectations, hostel life, campus dynamics
 - Use casual language when appropriate
 - Keep cultural references natural, not forced
+- Speak in genuine caring tone
 
 CRISIS RESPONSE:
 - If someone is in crisis, be direct and helpful
@@ -272,7 +277,7 @@ REMEMBER: You're a supportive friend who happens to know about mental health. Be
       const response = await axios.post(
         this.apiUrl,
         {
-          model: 'deepseek/deepseek-r1', // DeepSeek R1 model on OpenRouter
+          model: 'deepseek/deepseek-chat', // DeepSeek V3.1 model on OpenRouter
           messages: messages,
           temperature: 0.7,
           max_tokens: 800,
@@ -303,6 +308,12 @@ REMEMBER: You're a supportive friend who happens to know about mental health. Be
 
     } catch (error) {
       console.error('Chatbot API Error:', error);
+      // Log error details to a file for debugging
+      const fs = require('fs');
+      const logMessage = `[${new Date().toISOString()}] Chatbot API Error: ${error}\n`;
+      fs.appendFile('chatbot_errors.log', logMessage, (err: any) => {
+        if (err) console.error('Failed to write chatbot error log:', err);
+      });
       
       // Fallback response if API fails
       return {

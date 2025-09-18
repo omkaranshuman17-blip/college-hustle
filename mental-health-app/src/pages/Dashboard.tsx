@@ -1,15 +1,18 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Spline from '@splinetool/react-spline';
-import {
-  ChartBarIcon,
-  FireIcon,
-  TrophyIcon,
-  HeartIcon,
-  SparklesIcon,
-  ArrowTrendingUpIcon,
+import { 
+  HeartIcon, 
+  SparklesIcon, 
+  ChatBubbleLeftRightIcon, 
   CpuChipIcon,
-  ChatBubbleLeftRightIcon
+  ArrowTrendingUpIcon,
+  FireIcon,
+  StarIcon,
+  TrophyIcon,
+  BookOpenIcon,
+  UserGroupIcon,
+  ChartBarIcon
 } from '@heroicons/react/24/outline';
 import { useAuthStore } from '../store/authStore';
 import { Link } from 'react-router-dom';
@@ -155,6 +158,36 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center space-x-2 text-green-100">
               <HeartIcon className="w-5 h-5" />
               <span className="text-sm">How are you?</span>
+            </div>
+          </FeatureCard>
+
+          <FeatureCard
+            title="Learning Hub"
+            subtitle="Educational resources"
+            description="Videos, audio guides & articles in your language"
+            backgroundGradient="dark:bg-gradient-to-br dark:from-purple-900 dark:to-purple-800 bg-gradient-to-br from-purple-400 to-purple-600"
+            textColor="text-white"
+            link="/resources"
+            mascotMood="happy"
+          >
+            <div className="flex items-center space-x-2 text-purple-100">
+              <BookOpenIcon className="w-5 h-5" />
+              <span className="text-sm">Explore resources</span>
+            </div>
+          </FeatureCard>
+
+          <FeatureCard
+            title="Peer Support"
+            subtitle="Community forum"
+            description="Connect with others & get support from volunteers"
+            backgroundGradient="dark:bg-gradient-to-br dark:from-orange-900 dark:to-orange-800 bg-gradient-to-br from-orange-400 to-orange-600"
+            textColor="text-white"
+            link="/support"
+            mascotMood="happy"
+          >
+            <div className="flex items-center space-x-2 text-orange-100">
+              <UserGroupIcon className="w-5 h-5" />
+              <span className="text-sm">Join community</span>
             </div>
           </FeatureCard>
         </div>

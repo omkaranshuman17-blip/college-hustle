@@ -1,6 +1,6 @@
 # Mental Health Tool 🧠💚
 
-A comprehensive, engaging, and therapeutic web application built on Bubble.io that combines mental health support with gamification to reduce stigma and promote wellbeing.
+A comprehensive, engaging, and therapeutic web application built with React and Node.js that combines mental health support with gamification to reduce stigma and promote wellbeing.
 
 ## 🎯 Project Overview
 
@@ -13,27 +13,37 @@ This mental health tool is designed to make mental health support accessible, en
 - **Interactive Mental Health Games**: Fun, educational games that promote mental wellness
 - **Validated Assessments**: PHQ-9, GAD-7, and Big Five personality tests
 - **Daily Challenges**: Gamified tasks to build healthy habits
+- **Psychoeducational Resource Hub**: Videos, relaxation audio, and mental wellness guides in regional languages
+- **Peer Support Platform**: Moderated peer-to-peer support forum with trained student volunteers
 - **Privacy-First Design**: All data is anonymous and secure
 
 ## 🏗️ Technical Architecture
 
 ### Platform
-- **Bubble.io**: No-code platform for rapid development
-- **Database**: Built-in Bubble database with privacy-focused schema
-- **Responsive Design**: Mobile-first approach for accessibility
+- **Frontend**: React with TypeScript for type-safe, component-based development
+- **Backend**: Node.js with Express for API services and data management
+- **Database**: Secure database with privacy-focused schema design
+- **Styling**: Tailwind CSS for responsive, mobile-first design
 
 ### Project Structure
 ```
 mental_health_tool/
+├── mental-health-app/
+│   ├── src/
+│   │   ├── pages/           # Main application pages
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── Games.tsx
+│   │   │   ├── Assessments.tsx
+│   │   │   ├── PsychoeducationalHub.tsx
+│   │   │   └── PeerSupportPlatform.tsx
+│   │   ├── components/      # Reusable React components
+│   │   ├── games/          # Interactive mental health games
+│   │   └── assessments/    # Mental health assessment tools
+│   ├── backend/        # Node.js backend services
+│   └── public/         # Static assets
 ├── assets/
 │   ├── audio/          # Calming music tracks (CC licensed)
 │   └── images/         # Icons, badges, and visual assets
-├── src/
-│   ├── components/     # Reusable Bubble elements
-│   ├── games/          # Game logic and configurations
-│   ├── tests/          # Mental health assessment implementations
-│   └── workflows/      # Bubble workflow definitions
-├── database/           # Data type schemas and privacy rules
 ├── config/            # App settings and configurations
 └── docs/              # Additional documentation
 ```
@@ -59,10 +69,10 @@ mental_health_tool/
 - Visual icons for engagement
 - Score based on speed and accuracy
 
-#### Game 2: Stress Buster Bubble Pop (Arcade-style)
-- Pop bubbles representing stressors
-- Reveals positive affirmations
-- Random generation for variety
+#### Game 2: Breathing Bubbles (Mindfulness Game)
+- Interactive breathing exercise with visual bubbles
+- Reveals positive affirmations and mindfulness tips
+- Customizable breathing patterns for relaxation
 
 #### Game 3: Gratitude Journal Quest (Adventure)
 - Daily prompts for gratitude practice
@@ -96,37 +106,61 @@ mental_health_tool/
   - "Journal one positive thought"
   - "Play a relaxation game"
 - **Streak System**: Visual rewards for consistency
-- **Reminders**: Email/push notifications via OneSignal
+- **Reminders**: Email and browser push notifications for daily tasks
+
+### 6. Psychoeducational Resource Hub 📚
+- **Multi-format Content**: Videos, guided audio sessions, and comprehensive written guides
+- **Regional Language Support**: Content available in English, Hindi, Spanish, Tamil, Telugu, and Bengali
+- **Categorized Resources**: Organized by topic (anxiety, depression, stress, sleep, mindfulness, relationships)
+- **Interactive Media Player**: Built-in video and audio players with playback controls
+- **Search & Filter**: Easy discovery of relevant content by category and language
+- **Evidence-based Materials**: All content follows WHO and APA guidelines
+
+### 7. Peer Support Platform 🤝
+- **Moderated Community Forums**: Safe spaces for sharing experiences and seeking support
+- **Anonymous Posting**: Option to post anonymously for sensitive topics
+- **Trained Volunteer Network**: Certified peer support volunteers available 24/7
+- **Volunteer Training Program**: Multi-module certification covering active listening, crisis recognition, and cultural sensitivity
+- **Category-based Discussions**: Organized forums for different mental health topics
+- **Real-time Moderation**: AI-assisted moderation with human oversight
+- **Badge System**: Recognition for helpful contributors and volunteers
+- **Crisis Response Protocol**: Immediate escalation pathways for users in crisis
 
 ## 📊 Database Schema
 
-### Data Types
+### Database Schema
 
 #### User
-- Email (optional)
-- Username
-- Password (encrypted)
-- Anonymous ID
-- Created Date
+- id (UUID, primary key)
+- email (string, optional)
+- username (string, unique)
+- password_hash (string, encrypted)
+- anonymous_id (UUID)
+- created_at (timestamp)
+- updated_at (timestamp)
 
 #### GameScore
-- User (reference)
-- GameType (text)
-- Score (number)
-- Date (date)
+- id (UUID, primary key)
+- user_id (UUID, foreign key)
+- game_type (string)
+- score (integer)
+- completed_at (timestamp)
 
 #### TestResult
-- User (anonymous ID)
-- TestType (text)
-- Score (number)
-- Responses (list)
-- Timestamp (date)
+- id (UUID, primary key)
+- user_id (UUID, anonymous reference)
+- test_type (string)
+- score (integer)
+- responses (JSON)
+- completed_at (timestamp)
 
 #### DailyTask
-- User (reference)
-- Date (date)
-- Tasks (list)
-- Completed (yes/no)
+- id (UUID, primary key)
+- user_id (UUID, foreign key)
+- task_date (date)
+- tasks (JSON array)
+- completed (boolean)
+- created_at (timestamp)
 
 ## 🎨 Design Guidelines
 
@@ -145,36 +179,39 @@ mental_health_tool/
 ## 🔐 Privacy & Security
 
 - **Anonymous by Default**: No real names required
-- **Data Encryption**: Sensitive fields encrypted
+- **Data Encryption**: Sensitive fields encrypted using industry-standard algorithms
 - **No Data Sharing**: User data never shared with third parties
 - **Clear Disclaimers**: Not a replacement for professional help
-- **Secure Storage**: Bubble's built-in security features
+- **Secure Storage**: Database encryption at rest and in transit
+- **Authentication**: JWT-based authentication with secure password hashing
+- **HTTPS Only**: All communications encrypted with TLS/SSL
 
 ## 🚀 Implementation Roadmap
 
 ### Phase 1: Foundation (Week 1-2)
-- [ ] Set up Bubble.io workspace
-- [ ] Create basic page structure
-- [ ] Implement user authentication
-- [ ] Design responsive layouts
+- [x] Set up React project with TypeScript
+- [x] Create basic page structure and routing
+- [x] Implement user authentication with JWT
+- [x] Design responsive layouts with Tailwind CSS
 
 ### Phase 2: Core Features (Week 3-4)
-- [ ] Integrate audio player with CC music
-- [ ] Build first two games
-- [ ] Implement PHQ-9 and GAD-7 tests
-- [ ] Create daily task system
+- [x] Integrate audio player components
+- [x] Build interactive mental health games
+- [x] Implement PHQ-9 and GAD-7 assessment tools
+- [x] Create daily task management system
 
 ### Phase 3: Enhancement (Week 5-6)
-- [ ] Add remaining games
-- [ ] Implement all assessment tools
-- [ ] Set up notification system
+- [x] Add psychoeducational resource hub
+- [x] Implement peer support platform
+- [x] Add multi-language support
+- [ ] Set up push notification system
 - [ ] Create admin dashboard
 
 ### Phase 4: Polish & Launch (Week 7-8)
-- [ ] User testing and feedback
-- [ ] Performance optimization
-- [ ] PWA configuration
-- [ ] Final testing and launch
+- [ ] User testing and feedback collection
+- [ ] Performance optimization and code splitting
+- [ ] Progressive Web App (PWA) configuration
+- [ ] Final testing and production deployment
 
 ## 🎵 Music Resources
 
@@ -185,10 +222,11 @@ mental_health_tool/
 
 ## 📱 Progressive Web App (PWA)
 
-- Offline capability for basic features
-- Home screen installation
-- Push notifications support
-- Cache management for assets
+- **Offline Capability**: Service worker implementation for offline access to core features
+- **Home Screen Installation**: Web app manifest for native-like installation
+- **Push Notifications**: Browser-based notifications for reminders and support
+- **Cache Management**: Intelligent caching strategy for assets and API responses
+- **App Shell Architecture**: Fast loading with cached shell and dynamic content
 
 ## 🆘 Mental Health Resources
 
@@ -205,14 +243,16 @@ mental_health_tool/
 
 ## 🔧 Technical Setup
 
-### Bubble.io Configuration:
-1. **Pages**: Home, Dashboard, Games Hub, Tests, Daily Tasks, Profile
-2. **Plugins**: 
-   - Audio Player (free)
-   - OneSignal (push notifications)
-   - Confetti animation
-3. **API Connectors**: For external scoring if needed
-4. **Workflows**: Scheduled tasks, user actions, data processing
+### React Application Configuration:
+1. **Pages**: Landing, Dashboard, Games, Assessments, Tasks, Profile, Resources Hub, Peer Support
+2. **Libraries**: 
+   - Framer Motion (animations)
+   - Heroicons (icons)
+   - React Router (navigation)
+   - Zustand (state management)
+   - Tailwind CSS (styling)
+3. **Backend**: Node.js with Express for API services
+4. **Features**: Real-time audio/video players, forum moderation, multi-language support
 
 ## 📈 Analytics & Monitoring
 
@@ -266,4 +306,4 @@ This project is designed for public benefit. All original content is provided un
 
 **Target Launch**: [To be determined]
 
-**Platform**: Web App (Bubble.io)
+**Platform**: Progressive Web App (React + Node.js)

@@ -8,7 +8,9 @@ import {
   CalendarDaysIcon, 
   UserCircleIcon,
   ArrowRightOnRectangleIcon,
-  ChatBubbleLeftRightIcon
+  ChatBubbleLeftRightIcon,
+  BookOpenIcon,
+  UserGroupIcon
 } from '@heroicons/react/24/outline';
 import { useAuthStore } from '../store/authStore';
 import ThemeToggle from './ThemeToggle';
@@ -34,6 +36,8 @@ const NavigationUpgraded: React.FC = () => {
     { path: '/dashboard', icon: HomeIcon, label: 'Dashboard' },
     { path: '/assessments', icon: ClipboardDocumentCheckIcon, label: 'Assessments' },
     { path: '/games', icon: PuzzlePieceIcon, label: 'Games' },
+    { path: '/resources', icon: BookOpenIcon, label: 'Resources' },
+    { path: '/support', icon: UserGroupIcon, label: 'Peer Support' },
     { path: '/tasks', icon: CalendarDaysIcon, label: 'Daily Tasks' },
     { path: '/chatbot', icon: ChatBubbleLeftRightIcon, label: 'CapyChat AI' },
     { path: '/profile', icon: UserCircleIcon, label: 'Profile' },

@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
           className="mb-8"
         >
           <div className="card-cute p-6 flex items-center space-x-4">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cute-pink-500 to-cute-purple-500 flex items-center justify-center">
+            <div className="w-20 h-20 rounded-full flex items-center justify-center">
               <UserCircleIcon className="w-12 h-12 text-white" />
             </div>
             <div className="flex-1">

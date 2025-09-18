@@ -1,6 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, AlertTriangle, Phone, MapPin, Book, X, Bot, Heart, Smile } from 'lucide-react';
+import { Send, AlertTriangle, Phone, MapPin, Book, X, Bot, Heart, Smile, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import axios from 'axios';
+
+// Declare Web Speech API types
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  start(): void;
+  stop(): void;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition: {
+      new(): SpeechRecognition;
+    };
+    webkitSpeechRecognition: {
+      new(): SpeechRecognition;
+    };
+  }
+}
 
 interface Message {
   id: string;
@@ -35,6 +66,11 @@ const Chatbot: React.FC = () => {
   const [showCrisisResources, setShowCrisisResources] = useState(false);
   const [botEmotion, setBotEmotion] = useState<'caring' | 'supportive' | 'concerned' | 'celebrating'>('caring');
   const [isTypingWithHeart, setIsTypingWithHeart] = useState(false);
+  
+  // Voice input/output states
+  const [isRecording, setIsRecording] = useState(false);
+  const [isTTSEnabled, setIsTTSEnabled] = useState(true);
+  const recognitionRef = useRef<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,6 +91,34 @@ const Chatbot: React.FC = () => {
           ]
         }
     ]);
+
+    // Setup SpeechRecognition
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
+        const transcript = event.results[0][0].transcript;
+        setInputMessage(transcript);
+        setIsRecording(false);
+        // Optionally auto-send after voice input
+        // handleSendMessage(); // Uncomment if auto-send desired
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error('Speech recognition error', event.error);
+        setIsRecording(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsRecording(false);
+      };
+    } else {
+      console.warn('SpeechRecognition API not supported in this browser.');
+    }
   }, []);
 
   useEffect(() => {
@@ -161,6 +225,13 @@ const Chatbot: React.FC = () => {
       if (crisis) {
         setShowCrisisResources(true);
         setBotEmotion('concerned');
+      }
+
+      // Text-to-Speech for assistant message if enabled
+      if (isTTSEnabled && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(message);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
       }
       
       // Add a small delay to show the bot "thinking with care"
@@ -453,7 +524,7 @@ const Chatbot: React.FC = () => {
 
       {/* Input Area */}
       <div className="border-t p-4">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 items-center">
           <input
             type="text"
             value={inputMessage}
@@ -469,6 +540,35 @@ const Chatbot: React.FC = () => {
             className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition shadow-sm font-medium"
           >
             <Send className="w-5 h-5" />
+          </button>
+          {/* Voice input toggle button */}
+          <button
+            onClick={() => {
+              if (isRecording) {
+                recognitionRef.current?.stop();
+                setIsRecording(false);
+              } else {
+                try {
+                  recognitionRef.current?.start();
+                  setIsRecording(true);
+                } catch (error) {
+                  console.error('Speech recognition start error:', error);
+                }
+              }
+            }}
+            disabled={isLoading}
+            className="p-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 transition text-white"
+            title={isRecording ? 'Stop voice input' : 'Start voice input'}
+          >
+            {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+          </button>
+          {/* TTS toggle button */}
+          <button
+            onClick={() => setIsTTSEnabled(!isTTSEnabled)}
+            className={`p-2 rounded-lg transition text-white ${isTTSEnabled ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-gray-400 hover:bg-gray-500'}`}
+            title={isTTSEnabled ? 'Disable Text-to-Speech' : 'Enable Text-to-Speech'}
+          >
+            {isTTSEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
           </button>
         </div>
         <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">

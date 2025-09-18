@@ -7,6 +7,9 @@ import Assessments from './pages/Assessments';
 import Games from './pages/Games';
 import Tasks from './pages/Tasks';
 import Profile from './pages/Profile';
+import PsychoeducationalHub from './pages/PsychoeducationalHub';
+import PeerSupportPlatform from './pages/PeerSupportPlatform';
+import TestComponent from './components/TestComponent';
 import Chatbot from './components/Chatbot';
 import NavigationUpgraded from './components/NavigationUpgraded';
 import PerformanceDashboard from './components/PerformanceDashboard';
@@ -64,6 +67,9 @@ const RouterContent: React.FC<RouterContentProps> = ({
           <Route path="/games" element={isAuthenticated ? <Games /> : <Navigate to="/" />} />
           <Route path="/tasks" element={isAuthenticated ? <Tasks /> : <Navigate to="/" />} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/" />} />
+          <Route path="/resources" element={isAuthenticated ? <PsychoeducationalHub /> : <Navigate to="/" />} />
+          <Route path="/support" element={isAuthenticated ? <PeerSupportPlatform /> : <Navigate to="/" />} />
+          <Route path="/test" element={<TestComponent />} />
           <Route path="/chatbot" element={<Chatbot />} />
         </Routes>
       </motion.main>
