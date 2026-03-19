@@ -151,18 +151,6 @@ const Chatbot: React.FC = () => {
     return 'caring';
   };
 
-  const getEmotionalStyling = (emotion: string) => {
-    switch (emotion) {
-      case 'concerned':
-        return 'bg-red-50 border-red-200 shadow-lg shadow-red-100';
-      case 'celebrating':
-        return 'bg-green-50 border-green-200 shadow-lg shadow-green-100';
-      case 'supportive':
-        return 'bg-purple-50 border-purple-200 shadow-lg shadow-purple-100';
-      default: // caring
-        return 'bg-emerald-50 border-saffron-200 shadow-lg shadow-emerald-100';
-    }
-  };
 
   const getEmotionalIcon = (emotion: string) => {
     switch (emotion) {
@@ -417,24 +405,24 @@ const Chatbot: React.FC = () => {
             className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-md px-4 py-3 rounded-lg transition-all duration-300 ${
+              className={`${
                 message.role === 'user'
-                  ? 'bg-blue-500 text-white shadow-lg'
+                  ? 'chatbot-bubble-user'
                   : message.role === 'system'
-                  ? 'bg-gray-200 text-gray-800'
-                  : `${getEmotionalStyling(botEmotion)} text-gray-900 border`
+                  ? 'chatbot-bubble-system'
+                  : `chatbot-bubble-assistant emotion-${botEmotion}`
               }`}
             >
-              <p className="whitespace-pre-wrap">{message.content}</p>
+              <div className="message-content">{message.content}</div>
               
               {message.suggestions && message.suggestions.length > 0 && (
-                <div className="mt-3 space-y-2">
-                  <p className="text-sm font-semibold text-gray-900">Suggestions:</p>
+                <div className="chatbot-suggestions">
+                  <p className="suggestions-label">Suggestions:</p>
                   {message.suggestions.map((suggestion, index) => (
                     <button
                       key={index}
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="block w-full text-left text-sm bg-white bg-opacity-60 rounded px-2 py-1 hover:bg-opacity-80 transition text-gray-800 hover:text-gray-900 shadow-sm"
+                      className="chatbot-suggestion-button"
                     >
                       • {suggestion}
                     </button>
@@ -443,11 +431,11 @@ const Chatbot: React.FC = () => {
               )}
 
               {message.crisis && message.resources && (
-                <div className="mt-3 p-2 bg-red-100 rounded text-red-800">
-                  <p className="font-bold text-sm mb-1">Immediate Help Available:</p>
+                <div className="chatbot-crisis-resources">
+                  <p className="crisis-title">Immediate Help Available:</p>
                   {message.resources.map((resource: any, index: number) => (
-                    <div key={index} className="text-xs">
-                      <p className="font-semibold">{resource.name}</p>
+                    <div key={index} className="chatbot-crisis-resource">
+                      <p className="resource-name">{resource.name}</p>
                       <p>Call: {resource.number}</p>
                     </div>
                   ))}
@@ -458,15 +446,15 @@ const Chatbot: React.FC = () => {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className={`bg-gradient-to-r ${getEmotionalStyling(botEmotion)} px-4 py-3 rounded-lg border shadow-sm`}>
-              <div className="flex items-center space-x-3">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce delay-100"></div>
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce delay-200"></div>
+            <div className="chatbot-typing-bubble">
+              <div className="chatbot-typing-indicator">
+                <div className="chatbot-typing-dots">
+                  <div className="chatbot-typing-dot"></div>
+                  <div className="chatbot-typing-dot"></div>
+                  <div className="chatbot-typing-dot"></div>
                 </div>
-                <span className="text-sm text-gray-800 font-medium animate-pulse">
-                  {isTypingWithHeart ? '💙 Thinking with care...' : 'CapyChat AI is typing...'}
+                <span className="chatbot-typing-text">
+                  {isTypingWithHeart ? '💙 Thinking with care...' : 'CapyBro is typing...'}
                 </span>
                 {isTypingWithHeart && <Heart className="w-4 h-4 text-pink-400 animate-pulse" />}
               </div>

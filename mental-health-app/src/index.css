@@ -13,6 +13,9 @@
 /* Import Electric Navigation styles */
 @import './styles/electric-navigation.css';
 
+/* Import Chatbot Bubble styles */
+@import './styles/chatbot-bubbles.css';
+
 @layer base {
   /* Soft meditation app color palette - calming blues and teals */
   :root,

@@ -78,7 +78,7 @@ const Navigation: React.FC = () => {
                 College Hustle
               </span>
               <span className="text-xs text-gray-400 leading-tight">
-                mental health matters
+                Your mental health matters
               </span>
             </div>
           </Link>
