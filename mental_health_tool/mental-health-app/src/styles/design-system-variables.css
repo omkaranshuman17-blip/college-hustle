@@ -1,0 +1,233 @@
+/* MindSpace Design System Variables v1.0 */
+/* Mental Health App - Calm & Peaceful Design System for Teens/Young Adults */
+
+:root {
+  /* ==================== COLOR SYSTEM ==================== */
+  
+  /* Neutral Palette (Drift Slate) */
+  --color-slate-50:  #F8FAFC;
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-slate-300: #CBD5E1;
+  --color-slate-400: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1F2937;
+  --color-slate-900: #0F172A;
+
+  /* Primary Palette (Tide Teal) */
+  --color-teal-50:  #E6FAF7;
+  --color-teal-100: #C9F3EC;
+  --color-teal-200: #9FE7DC;
+  --color-teal-300: #72D9CB;
+  --color-teal-400: #49C9B9;
+  --color-teal-500: #2AB3A9; /* PRIMARY */
+  --color-teal-600: #1B918C;
+  --color-teal-700: #136F6C;
+  --color-teal-800: #0E4D4C;
+  --color-teal-900: #0A3536;
+
+  /* Secondary Palette (Lavender Haze) */
+  --color-lavender-50:  #F5F3FF;
+  --color-lavender-100: #ECE9FE;
+  --color-lavender-200: #DCD6FD;
+  --color-lavender-300: #C2B9FA;
+  --color-lavender-400: #A596F3;
+  --color-lavender-500: #8B79EC; /* SECONDARY */
+  --color-lavender-600: #6E5DCD;
+  --color-lavender-700: #5849A9;
+  --color-lavender-800: #443885;
+  --color-lavender-900: #30285F;
+
+  /* Accent Palette (Sunrise Peach) */
+  --color-peach-50:  #FFF6F1;
+  --color-peach-100: #FFE9DC;
+  --color-peach-200: #FFD2B6;
+  --color-peach-300: #FFB789;
+  --color-peach-400: #FF9A61;
+  --color-peach-500: #FF7E45; /* ACCENT */
+  --color-peach-600: #E56536;
+  --color-peach-700: #B94E2B;
+  --color-peach-800: #8E3B23;
+  --color-peach-900: #5F2918;
+
+  /* Semantic Colors */
+  --color-success:     #28A879;
+  --color-success-bg:  #E6F7F1;
+  --color-warning:     #F2B23D;
+  --color-warning-bg:  #FFF9E6;
+  --color-danger:      #D95D5D;
+  --color-danger-bg:   #FDEAEA;
+  --color-info:        #2AB3A9;
+  --color-info-bg:     #E6FAF7;
+
+  /* Surface Colors - Light Mode */
+  --color-background:    #F6F8FA;
+  --color-surface:       #FFFFFF;
+  --color-surface-raised:#FFFFFF;
+  --color-border:        #E2E8F0;
+  --color-divider:       #F1F5F9;
+
+  /* Gradient Definitions */
+  --gradient-primary: linear-gradient(135deg, #2AB3A9 0%, #8B79EC 100%);
+  --gradient-dawn:    linear-gradient(145deg, #8B79EC 0%, #FF9A61 100%);
+  --gradient-calm:    linear-gradient(180deg, #E6FAF7 0%, #F5F3FF 100%);
+  --gradient-subtle:  linear-gradient(180deg, rgba(42, 179, 169, 0.08) 0%, rgba(139, 121, 236, 0.08) 100%);
+
+  /* ==================== TYPOGRAPHY ==================== */
+  
+  /* Font Stacks */
+  --font-heading: 'Plus Jakarta Sans', 'Segoe UI Variable', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+
+  /* Type Scale (Major Third - 1.25x) */
+  --text-display-lg: 48px;
+  --text-display:    40px;
+  --text-h1: 32px;
+  --text-h2: 26px;
+  --text-h3: 22px;
+  --text-h4: 18px;
+  --text-h5: 16px;
+  --text-body-lg: 18px;
+  --text-body:    16px;
+  --text-body-sm: 14px;
+  --text-caption: 12px;
+  --text-overline: 11px;
+
+  /* Line Heights */
+  --line-height-display-lg: 56px;
+  --line-height-display: 48px;
+  --line-height-h1: 40px;
+  --line-height-h2: 34px;
+  --line-height-h3: 30px;
+  --line-height-h4: 26px;
+  --line-height-h5: 24px;
+  --line-height-body-lg: 28px;
+  --line-height-body: 24px;
+  --line-height-body-sm: 22px;
+  --line-height-caption: 18px;
+  --line-height-overline: 16px;
+
+  /* ==================== SPACING ==================== */
+  
+  --space-0:   0px;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+
+  /* Container Widths */
+  --container-xs:  480px;
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl: 1536px;
+
+  /* Responsive Breakpoints */
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ==================== ANIMATION ==================== */
+  
+  /* Timing Functions */
+  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-breath: cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* Duration Scales */
+  --duration-instant: 50ms;
+  --duration-fast:    120ms;
+  --duration-normal:  200ms;
+  --duration-slow:    300ms;
+  --duration-slower:  400ms;
+  --duration-breath:  6000ms;
+
+  /* ==================== SHADOWS ==================== */
+  
+  --shadow-xs: 0 2px 6px rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.10);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.14);
+  --shadow-xl: 0 20px 40px rgba(15, 23, 42, 0.16);
+  --shadow-2xl: 0 25px 50px rgba(15, 23, 42, 0.18);
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ==================== HOLOGRAPHIC THEME ==================== */
+  
+  /* Holographic Color Palette */
+  --color-neon-blue:    #00FFFF;
+  --color-neon-cyan:    #00FFAA;
+  --color-neon-purple:  #AA00FF;
+  --color-electric-green: #39FF14;
+  --color-holo-glow:    rgba(0, 255, 255, 0.6);
+
+  /* Holographic Gradients */
+  --gradient-hologram: linear-gradient(45deg, var(--color-neon-blue) 0%, var(--color-neon-purple) 33%, var(--color-electric-green) 66%, var(--color-neon-cyan) 100%);
+  --gradient-iridescent: linear-gradient(135deg, rgba(0, 255, 255, 0.8) 0%, rgba(170, 0, 255, 0.8) 50%, rgba(57, 255, 20, 0.8) 100%);
+  --gradient-holo-bg: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+
+  /* Glow Shadows */
+  --shadow-holo-glow: 0 0 20px var(--color-holo-glow);
+  --shadow-neon-glow: 0 0 30px var(--color-neon-blue), 0 0 40px var(--color-neon-purple);
+  --shadow-iridescent: 0 0 15px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(170, 0, 255, 0.3);
+
+  /* Hologram Animation Keyframes (can be referenced) */
+  --keyframes-hologram-flicker: hologram-flicker 2s infinite;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"],
+html.dark {
+  /* Surface Colors - Dark Mode */
+  --color-background:    #0A0F1B;
+  --color-surface:       #111827;
+  --color-surface-raised:#1F2937;
+  --color-border:        #334155;
+  --color-divider:       #1F2937;
+
+  /* Adjust shadows for dark mode */
+  --shadow-xs: 0 2px 6px rgba(0, 0, 0, 0.20);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.30);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.40);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* Prefers Color Scheme Support */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Auto dark mode */
+    --color-background:    #0A0F1B;
+    --color-surface:       #111827;
+    --color-surface-raised:#1F2937;
+    --color-border:        #334155;
+    --color-divider:       #1F2937;
+  }
+}

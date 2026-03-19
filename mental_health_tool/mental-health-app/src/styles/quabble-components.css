@@ -1,0 +1,303 @@
+/* Quabble-inspired component styles for joyful, engaging mental health app */
+
+/* Wellness Activity Cards - like Quabble's features */
+.wellness-activity-card {
+  @apply rounded-2xl p-6 shadow-lg transition-all duration-300;
+  background: #fefdfb;
+  border: 1px solid #f9d23f;
+  backdrop-filter: blur(10px);
+}
+
+.wellness-activity-card:hover {
+  @apply -translate-y-1 shadow-2xl;
+}
+
+html.dark .wellness-activity-card {
+  background: #5a3a1c;
+  border: 1px solid #b08554;
+}
+
+/* Gratitude Jar Style - inspired by Quabble's gratitude feature */
+.gratitude-card {
+  @apply rounded-3xl p-8;
+  background: #fff9e6;
+  border: 2px solid #f9d23f;
+  position: relative;
+  overflow: hidden;
+}
+
+.gratitude-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #f9d23f;
+}
+
+html.dark .gratitude-card {
+  background: #6d4823;
+  border: 2px solid #f9d23f;
+}
+
+/* Breathing Exercise Card - calm and soothing */
+.breathing-card {
+  @apply rounded-3xl p-6;
+  background: #f7f8f6;
+  border: 1px solid #94a088;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.breathing-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(148, 160, 136, 0.3);
+}
+
+html.dark .breathing-card {
+  background: #414a37;
+  backdrop-filter: blur(20px);
+}
+
+/* Worry Box Style - comforting and secure */
+.worry-box {
+  @apply rounded-2xl p-6;
+  background: #f7f5f0;
+  border: 1px solid #b08554;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.worry-box::after {
+  content: '🗃️';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+html.dark .worry-box {
+  background: #6d4823;
+  border: 1px solid #9c6f3f;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Treasure Box - joyful memories */
+.treasure-card {
+  @apply rounded-3xl p-6;
+  background: #fffbf0;
+  border: 2px solid #f9d23f;
+  position: relative;
+  overflow: hidden;
+}
+
+.treasure-card::before {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 3rem;
+  opacity: 0.3;
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: rotate(0deg); }
+  100% { opacity: 0.7; transform: rotate(20deg); }
+}
+
+html.dark .treasure-card {
+  background: #845a2f;
+  border: 2px solid #f9d23f;
+}
+
+/* Proud Dandelion Style - self-confidence boosting */
+.pride-card {
+  @apply rounded-3xl p-6;
+  background: #f9fdf4;
+  border: 1px solid #94a088;
+  position: relative;
+}
+
+.pride-card::after {
+  content: '🌱';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+}
+
+html.dark .pride-card {
+  background: #414a37;
+  border: 1px solid #94a088;
+  backdrop-filter: blur(15px);
+}
+
+/* Interactive Elements - Quabble-style buttons */
+.quabble-button {
+  @apply px-6 py-3 rounded-2xl font-semibold transition-all duration-300;
+  font-family: 'Nunito', system-ui, sans-serif;
+  letter-spacing: 0.025em;
+  position: relative;
+  overflow: hidden;
+}
+
+.quabble-button-primary {
+  @apply quabble-button;
+  background: #b08554;
+  color: #fefdfb;
+  box-shadow: 0 4px 15px rgba(176, 133, 84, 0.3);
+}
+
+.quabble-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(176, 133, 84, 0.4);
+  background: #9c6f3f;
+}
+
+.quabble-button-secondary {
+  @apply quabble-button;
+  background: #94a088;
+  color: #fefdfb;
+  box-shadow: 0 4px 15px rgba(148, 160, 136, 0.3);
+}
+
+.quabble-button-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(148, 160, 136, 0.4);
+  background: #7d896f;
+}
+
+.quabble-button-accent {
+  @apply quabble-button;
+  background: #f9d23f;
+  color: #5a3a1c;
+  box-shadow: 0 4px 15px rgba(249, 210, 63, 0.3);
+}
+
+.quabble-button-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249, 210, 63, 0.4);
+  background: #e6be1a;
+}
+
+/* Progress Indicators - warm and encouraging */
+.quabble-progress {
+  @apply w-full h-3 rounded-full overflow-hidden;
+  background: rgba(237, 230, 212, 0.5);
+}
+
+.quabble-progress-bar {
+  @apply h-full transition-all duration-500 ease-out;
+  background: #f9d23f;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+html.dark .quabble-progress {
+  background: rgba(90, 58, 28, 0.3);
+}
+
+/* Input Fields - soft and welcoming */
+.quabble-input {
+  @apply w-full px-4 py-3 rounded-2xl border-2 font-medium transition-all duration-300;
+  font-family: 'Nunito', system-ui, sans-serif;
+  background: rgba(254, 253, 251, 0.8);
+  border-color: rgba(237, 230, 212, 0.6);
+  color: #5a3a1c;
+}
+
+.quabble-input:focus {
+  outline: none;
+  border-color: rgba(249, 210, 63, 0.8);
+  background: rgba(254, 253, 251, 1);
+  box-shadow: 0 0 0 3px rgba(249, 210, 63, 0.1);
+}
+
+html.dark .quabble-input {
+  background: rgba(90, 58, 28, 0.3);
+  border-color: rgba(156, 111, 63, 0.4);
+  color: #fefdfb;
+}
+
+html.dark .quabble-input:focus {
+  background: rgba(109, 72, 35, 0.5);
+  border-color: rgba(249, 210, 63, 0.6);
+  box-shadow: 0 0 0 3px rgba(249, 210, 63, 0.1);
+}
+
+/* Modal/Dialog Styles - cozy and inviting */
+.quabble-modal {
+  @apply rounded-3xl p-8 max-w-lg mx-auto;
+  background: #fefdfb;
+  border: 1px solid #ede6d4;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px -12px rgba(176, 133, 84, 0.3);
+}
+
+html.dark .quabble-modal {
+  background: #5a3a1c;
+  border: 1px solid #9c6f3f;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
+
+/* Navigation Elements - friendly and accessible */
+.quabble-nav-item {
+  @apply px-4 py-2 rounded-2xl transition-all duration-300 font-medium;
+  font-family: 'Nunito', system-ui, sans-serif;
+  color: #5a3a1c;
+}
+
+.quabble-nav-item:hover {
+  background: rgba(249, 210, 63, 0.2);
+  transform: translateY(-1px);
+}
+
+.quabble-nav-item.active {
+  background: #f9d23f;
+  color: #5a3a1c;
+  font-weight: 600;
+}
+
+html.dark .quabble-nav-item {
+  color: #fefdfb;
+}
+
+html.dark .quabble-nav-item:hover {
+  background: rgba(176, 133, 84, 0.2);
+}
+
+html.dark .quabble-nav-item.active {
+  background: #b08554;
+  color: #fefdfb;
+}
+
+/* Notification/Toast Styles - gentle and reassuring */
+.quabble-toast {
+  @apply rounded-2xl p-4 shadow-lg;
+  backdrop-filter: blur(10px);
+  border-left: 4px solid #f9d23f;
+}
+
+.quabble-toast.success {
+  background: rgba(148, 160, 136, 0.1);
+  border-left-color: #94a088;
+}
+
+.quabble-toast.info {
+  background: rgba(249, 210, 63, 0.1);
+  border-left-color: #f9d23f;
+}
+
+.quabble-toast.warning {
+  background: rgba(176, 133, 84, 0.1);
+  border-left-color: #b08554;
+}
+
+html.dark .quabble-toast {
+  backdrop-filter: blur(15px);
+}
